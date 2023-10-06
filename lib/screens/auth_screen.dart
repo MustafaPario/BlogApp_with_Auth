@@ -17,7 +17,7 @@ class HomePage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Image.asset(
-                'assets/images/firebase.png',
+                'assets/images/intrologo.png',
                 height: MediaQuery.of(context).size.height * 0.4,
               ),
               SizedBox(height: 30),
