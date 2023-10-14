@@ -1,5 +1,6 @@
 import 'package:blog_app/components/rounded_button.dart';
 import 'package:blog_app/screens/home_screen.dart';
+import 'package:blog_app/screens/signin.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -17,7 +18,6 @@ class _LoginInState extends State<LoginIn> {
   bool showSpinner = false;
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
-  TextEditingController nameController = TextEditingController();
 
   final _formKey = GlobalKey<FormState>();
   String email = "", password = "";
@@ -28,6 +28,9 @@ class _LoginInState extends State<LoginIn> {
         inAsyncCall: showSpinner,
         child: Scaffold(
           appBar: AppBar(
+            automaticallyImplyLeading: false,
+            backgroundColor: Colors.orange,
+            centerTitle: true,
             title: Text("Login"),
           ),
           body: Padding(
@@ -119,6 +122,19 @@ class _LoginInState extends State<LoginIn> {
                                 }
                               }
                             }),
+
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 10),
+                          child: InkWell(
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => SignIn()));
+                            },
+                            child: Text("Create Account"),
+                          ),
+                        ),
                       ],
                     ),
                   ),

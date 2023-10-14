@@ -1,6 +1,6 @@
 import 'package:blog_app/components/rounded_button.dart';
+import 'package:blog_app/screens/home_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
@@ -28,7 +28,10 @@ class _SignInState extends State<SignIn> {
         inAsyncCall: showSpinner,
         child: Scaffold(
           appBar: AppBar(
+            backgroundColor: Colors.orange,
             title: Text("Create Account"),
+            centerTitle: true,
+            automaticallyImplyLeading: false,
           ),
           body: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -122,6 +125,11 @@ class _SignInState extends State<SignIn> {
                                   if (user != null) {
                                     print('Sucessful register');
                                     toastMessage('User Succesfully Register');
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                HomeScreen()));
                                     setState(() {
                                       showSpinner = false;
                                     });

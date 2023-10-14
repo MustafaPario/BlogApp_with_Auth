@@ -53,7 +53,7 @@ class _SplashScreenState extends State<SplashScreen> {
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 30),
               child: Text(
-                "Food Blogs and Tips !",
+                "Blogs for EveryOne",
                 style: TextStyle(
                     fontStyle: FontStyle.italic,
                     fontSize: 30,
