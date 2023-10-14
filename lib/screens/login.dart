@@ -33,113 +33,123 @@ class _LoginInState extends State<LoginIn> {
             centerTitle: true,
             title: Text("Login"),
           ),
-          body: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  "LOGIN",
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 30),
-                  child: Form(
-                    key: _formKey,
-                    child: Column(
-                      children: [
-                        TextFormField(
-                          controller: emailController,
-                          keyboardType: TextInputType.emailAddress,
-                          decoration: InputDecoration(
-                            hintText: 'Email',
-                            labelText: 'Email',
-                            prefixIcon: Icon(Icons.email),
-                            border: OutlineInputBorder(),
-                          ),
-                          onChanged: (String value) {
-                            email = value;
-                          },
-                          validator: (value) {
-                            return value!.isEmpty ? 'Enter Email' : null;
-                          },
-                        ),
-
-                        // password
-
-                        Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 20),
-                          child: TextFormField(
-                            controller: passwordController,
-                            keyboardType: TextInputType.visiblePassword,
-                            obscureText: true,
+          body: Container(
+            height: MediaQuery.of(context).size.height * 1,
+            width: MediaQuery.of(context).size.width * 1,
+            color: Colors.grey.shade300,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    "LOGIN",
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 30),
+                    child: Form(
+                      key: _formKey,
+                      child: Column(
+                        children: [
+                          TextFormField(
+                            controller: emailController,
+                            keyboardType: TextInputType.emailAddress,
                             decoration: InputDecoration(
-                              hintText: 'Password',
-                              labelText: 'Password',
-                              prefixIcon: Icon(Icons.lock),
+                              hintText: 'Email',
+                              labelText: 'Email',
+                              prefixIcon: Icon(Icons.email),
                               border: OutlineInputBorder(),
                             ),
                             onChanged: (String value) {
-                              password = value;
+                              email = value;
                             },
                             validator: (value) {
-                              return value!.isEmpty ? 'Enter Password' : null;
+                              return value!.isEmpty ? 'Enter Email' : null;
                             },
                           ),
-                        ),
 
-                        RoundButton(
-                            title: "Login",
-                            onPress: () async {
-                              if (_formKey.currentState!.validate()) {
-                                setState(() {
-                                  showSpinner = true;
-                                });
-                                try {
-                                  final user =
-                                      await _auth.signInWithEmailAndPassword(
-                                          email: email.toString().trim(),
-                                          password: password.toString().trim());
-                                  if (user != null) {
-                                    print('Sucessful Login');
-                                    toastMessage('User Succesfully Login');
+                          // password
+
+                          Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 20),
+                            child: TextFormField(
+                              controller: passwordController,
+                              keyboardType: TextInputType.visiblePassword,
+                              obscureText: true,
+                              decoration: InputDecoration(
+                                hintText: 'Password',
+                                labelText: 'Password',
+                                prefixIcon: Icon(Icons.lock),
+                                border: OutlineInputBorder(),
+                              ),
+                              onChanged: (String value) {
+                                password = value;
+                              },
+                              validator: (value) {
+                                return value!.isEmpty ? 'Enter Password' : null;
+                              },
+                            ),
+                          ),
+
+                          RoundButton(
+                              title: "Login",
+                              onPress: () async {
+                                if (_formKey.currentState!.validate()) {
+                                  setState(() {
+                                    showSpinner = true;
+                                  });
+                                  try {
+                                    final user =
+                                        await _auth.signInWithEmailAndPassword(
+                                            email: email.toString().trim(),
+                                            password:
+                                                password.toString().trim());
+                                    if (user != null) {
+                                      print('Sucessful Login');
+                                      toastMessage('User Succesfully Login');
+                                      setState(() {
+                                        showSpinner = false;
+                                      });
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  HomeScreen()));
+                                    }
+                                  } catch (e) {
+                                    print(e.toString());
+                                    toastMessage(e.toString());
                                     setState(() {
                                       showSpinner = false;
                                     });
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                HomeScreen()));
                                   }
-                                } catch (e) {
-                                  print(e.toString());
-                                  toastMessage(e.toString());
-                                  setState(() {
-                                    showSpinner = false;
-                                  });
                                 }
-                              }
-                            }),
+                              }),
 
-                        Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 10),
-                          child: InkWell(
-                            onTap: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => SignIn()));
-                            },
-                            child: Text("Create Account"),
+                          SizedBox(
+                            height: 8,
                           ),
-                        ),
-                      ],
+
+                          Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 10),
+                            child: InkWell(
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => SignIn()));
+                              },
+                              child: Text("Create an Account"),
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                )
-              ],
+                  )
+                ],
+              ),
             ),
           ),
         ),
