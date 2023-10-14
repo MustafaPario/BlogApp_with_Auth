@@ -32,25 +32,17 @@ class _HomeScreenState extends State<HomeScreen> {
             title: Text("Blog Page"),
             centerTitle: true,
             actions: [
-              Row(
-                children: [
-                  Text(
-                    "Logout",
-                    style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
-                  ),
-                  InkWell(
-                    onTap: () {
-                      auth.signOut().then((value) {
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (context) => LoginIn()));
-                      });
-                    },
-                    child: Icon(Icons.logout),
-                  ),
-                  SizedBox(
-                    width: 20,
-                  )
-                ],
+              InkWell(
+                onTap: () {
+                  auth.signOut().then((value) {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => LoginIn()));
+                  });
+                },
+                child: Icon(Icons.logout),
+              ),
+              SizedBox(
+                width: 25,
               )
             ],
           ),
@@ -172,7 +164,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                   fontWeight: FontWeight.bold),
                                             ),
                                             Text(
-                                              "${auth.currentUser?.email}",
+                                              "${auth.currentUser!.email}",
                                               style: TextStyle(fontSize: 10),
                                             ),
                                             Spacer(),
